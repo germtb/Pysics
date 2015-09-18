@@ -1,4 +1,3 @@
-import pylab
 from numpy import arange
 from math import pi, cos, sin
 import matplotlib.pyplot as plt
@@ -14,20 +13,6 @@ def mars_xys():
         ys.append(MARS_RADIUS * sin(nu))
 
     return xs, ys
-
-
-def plot_orbit(f, nu_0=0, nu_1=2 * pi, step=0.01, axis=None):
-    xs = []
-    ys = []
-
-    for nu in arange(nu_0, nu_1, step):
-        x = f(nu)[0]
-        y = f(nu)[1]
-        xs.append(x)
-        ys.append(y)
-
-    pylab.axes().set_aspect('equal')
-    pylab.plot(xs, ys) if axis is None else axis.plot(xs, ys)
 
 
 def save_plot(xs, ys, filename, xs_extra=None, ys_extra=None, equal=False):
