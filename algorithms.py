@@ -2,21 +2,31 @@ import random
 from numpy.ma import arange
 
 
-def recursive_brute_force(f, a, b, divisions=10, epsilon=1e-4, limit=20):
+def brute_force(f, a, b, segments):
     x0 = a
     x1 = b
-    dx = (x1 - x0) / divisions
+    dx = (x1 - x0) / segments
 
-    for _ in arange(0, limit, 1):
-        fs = map(lambda _x: (_x, f(_x)), arange(x0, x1 + 2 * dx, dx))
-        x, _f = min(fs, key=lambda xf: xf[1])
+    fs = map(lambda _x: (_x, f(_x)), arange(x0, x1, dx))
+    return min(fs, key=lambda xf: abs(xf[1]))
 
-        if _f < epsilon:
+
+def recursive_brute_force(f, a, b, segments=10, recursions=10, epsilon=1e-5):
+    x0 = a
+    x1 = b
+    dx = (x1 - x0) / segments
+
+    for _ in arange(0, recursions, 1):
+        fs = map(lambda _x: (_x, f(_x)), arange(x0, x1, dx))
+        x, _f = min(fs, key=lambda xf: abs(xf[1]))
+        print(x, _f)
+
+        if abs(_f) < epsilon:
             return x, _f
 
         x0 = x - dx
         x1 = x + dx
-        dx = (x1 - x0) / divisions
+        dx = (x1 - x0) / segments
 
     return x, _f
 
