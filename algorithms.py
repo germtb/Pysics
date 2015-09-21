@@ -42,7 +42,7 @@ class RandomVariable:
         self.b = b
 
 
-def monte_carlo_min(f, *variables, epsilon=1e-4, limit=10000):
+def monte_carlo_min(f, *variables, epsilon=1e-4, limit=10000, log=False):
     f_min = 1000000000
     variables_min = []
     results = []
@@ -54,6 +54,9 @@ def monte_carlo_min(f, *variables, epsilon=1e-4, limit=10000):
         if _f < f_min:
             f_min = _f
             variables_min = _variables
+
+        if log:
+            print(_)
 
         results.append(f_min)
         if abs(f_min) < epsilon:
