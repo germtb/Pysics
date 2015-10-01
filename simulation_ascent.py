@@ -42,15 +42,6 @@ def circularization_phase(body, angle, thrust):
     return simulation
 
 
-def free_phase(body):
-    simulation = ThrustSimulation(
-        body,
-        300,
-        f_gravity)
-    simulation.run(1000, dt=DELTA_T)
-    return simulation
-
-
 body = ShapedBody(POSITION_0,
                   VELOCITY_0,
                   mass=26000.0,
